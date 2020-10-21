@@ -98,11 +98,11 @@ export async function activate(context: vscode.ExtensionContext) {
           if (document.uri.toString() === uri) {
             const parsedYAML = YAML.safeLoad(document.getText());
             if (parsedYAML) {
-              if (parsedYAML.swagger === "2.0") {
+              if ((parsedYAML as any).swagger === "2.0") {
                 return "swaggerviewer:swagger";
               } else if (
-                parsedYAML.openapi &&
-                parsedYAML.openapi.match(/^3\.0\.\d(-.+)?$/)
+                (parsedYAML as any).openapi &&
+                (parsedYAML as any).openapi.match(/^3\.0\.\d(-.+)?$/)
               ) {
                 return "swaggerviewer:openapi";
               }
